@@ -105,9 +105,9 @@ calcStats samples alpha =
   let sampleA = samples !! 0
       sampleB = samples !! 1
       candidates = pairUpCandidates sampleA sampleB
-      sortedCandidates = reverse $ sortOn ( \ ((_,y),(_,y')) -> abs y - y') candidates
+      sortedCandidates = reverse $ sortOn ( \ ((_,y),(_,y')) -> abs (y - y')) candidates
       topCandidate = head sortedCandidates
-      ksDist = abs (snd $ fst topCandidate) - (snd $ snd topCandidate)
+      ksDist = abs ((snd $ fst topCandidate) - (snd $ snd topCandidate))
       caRoot = cAlphaRoot sampleA sampleB alpha
       stat = (ksDist, (cAlphaRoot sampleA sampleB alpha), ksDist > caRoot)
   in (stat, [fst topCandidate, snd topCandidate])
